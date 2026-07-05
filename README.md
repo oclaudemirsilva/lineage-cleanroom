@@ -45,6 +45,12 @@ signed manifest verifies: True
 The `demo` shows the payoff: a naive predictor reports **AUC 0.9995**; CleanRoom finds the leak; the
 honest, group-aware AUC is **0.65**; and the signed manifest **rejects any tampering** with the numbers.
 
+### Proven on real public data → [`demos/`](demos/)
+Not just synthetic. On the **Pima Indians Diabetes** dataset (real, OpenML), patient-level leakage
+inflates AUC **0.9865 → 0.8246** honest (+0.16); oversample-before-split leaks **193** exact-duplicate
+rows; and on **Breast Cancer Wisconsin** the provenance gate catches **51** model-generated evaluation
+labels. Each demo commits a **signed manifest** as evidence and is CI-verified. See [demos/](demos/).
+
 ---
 
 ## The two gates

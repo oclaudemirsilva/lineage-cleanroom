@@ -63,21 +63,21 @@ def audit_label_provenance(
     dist_test = _dist(prov_test)
     violations: list[str] = []
 
-    # Regra 1: gold-humano no conjunto de teste (avaliação).
+    # Rule 1: human-attested gold in the evaluation (test) set.
     if policy.require_human_gold and prov_test is not None:
         non_human = sum(v for k, v in dist_test.items() if k != HUMAN)
         if non_human > 0:
             violations.append(
-                f"GOLD NÃO-HUMANO: {non_human} rótulo(s) de avaliação não são human-attested "
-                f"(distribuição: {dist_test})")
+                f"NON-HUMAN GOLD: {non_human} evaluation label(s) are not human-attested "
+                f"(distribution: {dist_test})")
 
-    # Regra 2: anti-autofagia no treino (opcional).
+    # Rule 2: anti-autophagy in the training set (optional).
     if policy.forbid_model_labels_in_train and prov_train is not None:
         bad = sum(v for k, v in dist_train.items() if k in policy.forbidden_train_sources)
         if bad > 0:
             violations.append(
-                f"AUTOFAGIA: {bad} rótulo(s) de treino de origem proibida "
-                f"{set(policy.forbidden_train_sources)} usados como verdade")
+                f"AUTOPHAGY: {bad} training label(s) from forbidden source(s) "
+                f"{set(policy.forbidden_train_sources)} used as ground truth")
 
     human_frac_test = (dist_test.get(HUMAN, 0) / max(1, sum(dist_test.values()))) if prov_test is not None else None
 

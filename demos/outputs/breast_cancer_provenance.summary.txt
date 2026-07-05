@@ -1,0 +1,5 @@
+Dataset: Breast Cancer Wisconsin (scikit-learn bundled, real) — provenance gate demo
+leakage gate (features)  : clean
+provenance gate (labels) : VIOLATION
+human fraction in eval   : 0.7018
+verdict                  : CONTAMINATION DETECTED - PROVENANCE - NON-HUMAN GOLD: 51 evaluation label(s) are not human-attested (distribution: {'human': 120, 'model': 51})

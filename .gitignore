@@ -6,8 +6,8 @@ venv/
 *.egg-info/
 build/
 dist/
-audit/
-*.manifest.json
-*.report.md
 events.jsonl
 .DS_Store
+
+# top-level scan output is scratch; demos/outputs/ IS committed as evidence
+/audit/

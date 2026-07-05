@@ -98,7 +98,7 @@ def test_provenance_not_provided_is_honest():
 def test_provenance_anti_autophagy_train():
     pol = ProvenancePolicy(require_human_gold=False, forbid_model_labels_in_train=True)
     rep = audit_label_provenance(["human", "model:self"], ["human"], pol)
-    assert any("AUTOFAGIA" in v for v in rep["violations"])
+    assert any("AUTOPHAGY" in v for v in rep["violations"])
 
 
 # ----------------------------- ingestão + audit_split (produto real, via CSV) -----------------------------

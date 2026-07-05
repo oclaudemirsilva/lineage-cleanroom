@@ -168,8 +168,14 @@ def audit_split(
 def _audit_verdict(leak: dict, prov: dict) -> str:
     parts = []
     if leak["leaked"]:
-        frac = leak["test_leak_fraction"] * 100
-        parts.append(f"LEAKAGE - {frac:.1f}% of test rows overlap training")
+        bits = []
+        if leak.get("feature_dup_test_rows"):
+            bits.append(f"{leak['test_leak_fraction']*100:.1f}% of test rows are exact "
+                        f"feature-duplicates of training rows")
+        if leak.get("group_span_test_rows"):
+            bits.append(f"{leak['group_span_test_rows']} test rows share a group "
+                        f"(donor/batch/region) with training")
+        parts.append("LEAKAGE - " + "; ".join(bits) if bits else "LEAKAGE detected")
     if prov.get("violations"):
         parts.append("PROVENANCE - " + "; ".join(prov["violations"]))
     if not parts:

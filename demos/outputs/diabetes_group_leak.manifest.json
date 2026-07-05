@@ -1,0 +1,40 @@
+{
+  "_public_key": "48edf1c7b0e281bb6aa49e77fa1061172038e998be5176c8d44b16b3a0be2777",
+  "_signature": "5b6902152b4bdb61300534110d8819a70f2e416d276315194bf08e843cb91c9298334572a46b034e45d990697072ed80da5c0631fcbd7997133d9ab0c7e4e802",
+  "dataset_fingerprint": "95f5a87b455e3f1776c846f37ec3bbdb0390c96b47553d0482261315fe71a7a1",
+  "leak_report": {
+    "check": "feature_hash + group_aware",
+    "decimals": 6,
+    "feature_dup_test_rows": 0,
+    "group_span_test_rows": 647,
+    "leaked": true,
+    "n_test": 692,
+    "n_train": 1612,
+    "test_leak_fraction": 0.0
+  },
+  "metrics": {
+    "n_test": 692,
+    "n_train": 1612
+  },
+  "provenance_report": {
+    "dist_test": {
+      "human": 692
+    },
+    "dist_train": {
+      "human": 1612
+    },
+    "human_fraction_test": 1.0,
+    "leaked": false,
+    "passed": true,
+    "policy": {
+      "forbid_model_labels_in_train": false,
+      "require_human_gold": true
+    },
+    "provided": true,
+    "violations": []
+  },
+  "split": "user-provided train/test",
+  "tool": "Lineage CleanRoom",
+  "verdict": "CONTAMINATION DETECTED - LEAKAGE - 647 test rows share a group (donor/batch/region) with training",
+  "version": "0.1.0"
+}

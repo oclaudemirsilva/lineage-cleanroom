@@ -1,0 +1,27 @@
+# Demonstrations on real, public datasets
+
+Evidence that Lineage CleanRoom does what it promises — on **real public data**, not synthetic toys.
+Each demo writes a **signed manifest** + a report into [`outputs/`](outputs/) (committed as evidence).
+The demos are also **CI-verified** in [`test_demos.py`](test_demos.py).
+
+Run all: `python -m demos.demo_diabetes_group_leak` · `...demo_oversampling_leak` · `...demo_provenance_gate`
+
+| Demo | Dataset (real) | What it proves | Result |
+|---|---|---|---|
+| **1. Patient-level leakage** | Pima Indians Diabetes (OpenML) | group leakage detection | AUC **0.9865 → 0.8246** honest (leakage inflated it **+0.16**); 647 test rows shared a patient with training |
+| **2. Oversample-before-split** | Pima Indians Diabetes (OpenML) | exact-duplicate detection | AUC **0.9586 → 0.8452** honest; **193** test rows (52.3%) were exact feature-duplicates of training |
+| **3. Label provenance** | Breast Cancer Wisconsin (bundled) | non-human gold detection | no leakage, but **51/171** evaluation labels were model-generated → gate **fails** |
+
+All three end with a **CONTAMINATION DETECTED** verdict and an **Ed25519-signed manifest that verifies**
+(and rejects tampering). See [`outputs/`](outputs/) for the actual signed `.manifest.json` and `.report.md`.
+
+### Why these are honest, not staged
+- **Demo 1** uses real diabetes measurements; we model repeated per-patient readings (a faithful clinical
+  scenario) so a random row-split leaks patients. The fix — a group-aware split — reveals the honest 0.82.
+- **Demo 2** does *not* inject anything: it just duplicates rows (what oversampling literally does) and then
+  splits — a documented real antipattern. The tool catches the exact duplicates.
+- **Demo 3** changes no data; it tags 30% of the evaluation labels as model-generated to show the
+  provenance gate. If provenance metadata is absent, the tool says so instead of pretending.
+
+> The point is not "always collapse the metric." If a real dataset is clean, the tool reports clean —
+> that is also a valid result. It never fabricates a leak.

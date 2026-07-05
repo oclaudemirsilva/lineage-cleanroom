@@ -1,0 +1,43 @@
+{
+  "_public_key": "2c39bc5fffbce872be53de1db792df23d771e0796dd66184666334f27e1d0819",
+  "_signature": "e431f37070f99058ea6df117d3b9af6d5bfcbd83ac4fc604a6ec22e1ae160ec1836e2f5e9b1f36f3d77fd2a7fe8fc5e4703b05b3789db311d16ca45799f81b07",
+  "dataset_fingerprint": "fc413922f921e07a9f10e8da88ef8eba7f3563ed67de9fd9ba7059f8f81836af",
+  "leak_report": {
+    "check": "feature_hash + group_aware",
+    "decimals": 6,
+    "feature_dup_test_rows": 0,
+    "group_span_test_rows": null,
+    "leaked": false,
+    "n_test": 171,
+    "n_train": 398,
+    "test_leak_fraction": 0.0
+  },
+  "metrics": {
+    "n_test": 171,
+    "n_train": 398
+  },
+  "provenance_report": {
+    "dist_test": {
+      "human": 120,
+      "model": 51
+    },
+    "dist_train": {
+      "human": 398
+    },
+    "human_fraction_test": 0.7018,
+    "leaked": true,
+    "passed": false,
+    "policy": {
+      "forbid_model_labels_in_train": false,
+      "require_human_gold": true
+    },
+    "provided": true,
+    "violations": [
+      "NON-HUMAN GOLD: 51 evaluation label(s) are not human-attested (distribution: {'human': 120, 'model': 51})"
+    ]
+  },
+  "split": "user-provided train/test",
+  "tool": "Lineage CleanRoom",
+  "verdict": "CONTAMINATION DETECTED - PROVENANCE - NON-HUMAN GOLD: 51 evaluation label(s) are not human-attested (distribution: {'human': 120, 'model': 51})",
+  "version": "0.1.0"
+}

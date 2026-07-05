@@ -1,0 +1,6 @@
+Dataset: Pima Indians Diabetes (OpenML, real) — patient-level leakage demo
+AUC with leakage (random row split) : 0.9865
+AUC honest (group-aware by patient) : 0.8246
+inflation from leakage              : +0.1619
+verdict                             : CONTAMINATION DETECTED - LEAKAGE - 647 test rows share a group (donor/batch/region) with training
+signed manifest verifies            : True

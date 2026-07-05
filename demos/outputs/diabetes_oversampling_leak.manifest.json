@@ -1,0 +1,40 @@
+{
+  "_public_key": "4e1b07a9d0025fba70ddcaade18e8d2e7ef420f37ec6239005e5ca03d852eb1b",
+  "_signature": "6617585e9215cd3664bf065f455ab1792b506b593e59b8d360f022ff353a4990384ee3d82e3323b3c2afdd565027cab91636a61fa99cea0fdadabfe911521003",
+  "dataset_fingerprint": "78a3fce083ad4134f2c1f171d9ba89055720511460d011e41646d5c0c3f02e8b",
+  "leak_report": {
+    "check": "feature_hash + group_aware",
+    "decimals": 6,
+    "feature_dup_test_rows": 193,
+    "group_span_test_rows": null,
+    "leaked": true,
+    "n_test": 369,
+    "n_train": 859,
+    "test_leak_fraction": 0.523
+  },
+  "metrics": {
+    "n_test": 369,
+    "n_train": 859
+  },
+  "provenance_report": {
+    "dist_test": {
+      "human": 369
+    },
+    "dist_train": {
+      "human": 859
+    },
+    "human_fraction_test": 1.0,
+    "leaked": false,
+    "passed": true,
+    "policy": {
+      "forbid_model_labels_in_train": false,
+      "require_human_gold": true
+    },
+    "provided": true,
+    "violations": []
+  },
+  "split": "user-provided train/test",
+  "tool": "Lineage CleanRoom",
+  "verdict": "CONTAMINATION DETECTED - LEAKAGE - 52.3% of test rows are exact feature-duplicates of training rows",
+  "version": "0.1.0"
+}

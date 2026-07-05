@@ -1,0 +1,5 @@
+Dataset: Pima Indians Diabetes (OpenML, real) — oversample-before-split demo
+AUC with leakage (oversample->split): 0.9586
+AUC honest (split first)            : 0.8452
+exact feature-duplicate test rows   : 193 (52.3% of test)
+verdict                             : CONTAMINATION DETECTED - LEAKAGE - 52.3% of test rows are exact feature-duplicates of training rows
