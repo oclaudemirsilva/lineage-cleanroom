@@ -19,6 +19,21 @@ a reproducibility certificate you can attach to a paper, a submission, or a mode
 
 ---
 
+## Who it's for
+
+A computational biologist in a genomic-immunology lab — the kind of lab **Alex Marson** runs. She runs
+pooled CRISPR / Perturb-seq screens in primary human T cells and trains models to prioritize hits and
+predict cell states. Before she trusts an AUC or puts a figure in a paper, she needs to know her
+train/test split isn't leaking (the same **donor or batch** on both sides) and that her gold labels were
+**attested by a human**, not imputed by another model. Today she checks this by hand, if she remembers —
+and the leak is usually invisible until a reviewer, or a failed replication, finds it.
+
+Lineage CleanRoom is the check she's missing: she points it at her dataset and gets a **signed verdict in
+seconds** — working software she can run without the author in the room. It is *additive to Claude
+Science*, which records an artifact's history but does not prevent leakage or certify label provenance.
+
+---
+
 ## Quickstart
 
 ```bash
