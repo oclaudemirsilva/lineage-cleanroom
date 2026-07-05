@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" role="img" aria-label="Lineage CleanRoom pipeline: dataset to leakage and provenance gates to a signed manifest" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+  <defs>
+    <marker id="arw" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 z" fill="#6e7681"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="320" rx="14" fill="#0d1117"/>
+
+  <text x="32" y="44" fill="#e6edf3" font-size="22" font-weight="700">Lineage CleanRoom</text>
+  <text x="32" y="70" fill="#8b949e" font-size="13.5">A provenance &amp; contamination firewall for scientific ML — audit any (features, label, group, provenance) table.</text>
+
+  <!-- Stage 1 -->
+  <rect x="32" y="110" width="182" height="112" rx="10" fill="#161b22" stroke="#30363d"/>
+  <text x="123" y="150" fill="#e6edf3" font-size="15" font-weight="600" text-anchor="middle">Your dataset</text>
+  <text x="123" y="176" fill="#8b949e" font-size="12" text-anchor="middle">train / test split</text>
+  <text x="123" y="196" fill="#8b949e" font-size="12" text-anchor="middle">features · labels</text>
+
+  <line x1="214" y1="166" x2="272" y2="166" stroke="#6e7681" stroke-width="2" marker-end="url(#arw)"/>
+
+  <!-- Stage 2: gates -->
+  <rect x="296" y="96" width="252" height="64" rx="10" fill="#161b22" stroke="#d29922"/>
+  <text x="314" y="124" fill="#e6edf3" font-size="14" font-weight="600">1 · Leakage gate</text>
+  <text x="314" y="144" fill="#8b949e" font-size="11.5">duplicate rows · group-spanning splits</text>
+
+  <rect x="296" y="172" width="252" height="64" rx="10" fill="#161b22" stroke="#d29922"/>
+  <text x="314" y="200" fill="#e6edf3" font-size="14" font-weight="600">2 · Provenance gate</text>
+  <text x="314" y="220" fill="#8b949e" font-size="11.5">gold = human-attested · anti-autophagy</text>
+
+  <line x1="548" y1="166" x2="606" y2="166" stroke="#6e7681" stroke-width="2" marker-end="url(#arw)"/>
+
+  <!-- Stage 3: signed manifest -->
+  <rect x="630" y="110" width="238" height="112" rx="10" fill="#161b22" stroke="#3fb950"/>
+  <text x="749" y="148" fill="#e6edf3" font-size="15" font-weight="600" text-anchor="middle">Signed manifest</text>
+  <text x="749" y="172" fill="#3fb950" font-size="12" text-anchor="middle">Ed25519 · tamper-evident</text>
+  <text x="749" y="192" fill="#8b949e" font-size="12" text-anchor="middle">a verdict you attach to a paper</text>
+
+  <!-- roadmap band -->
+  <line x1="32" y1="250" x2="868" y2="250" stroke="#21262d" stroke-width="1"/>
+  <text x="32" y="276" fill="#8b949e" font-size="12"><tspan fill="#e6edf3" font-weight="600">Now:</tspan> exact-duplicate &amp; group leakage + label provenance, signed and CI-verified.</text>
+  <text x="32" y="298" fill="#6e7681" font-size="12"><tspan fill="#8b949e" font-weight="600">Where it's going:</tspan> more formats (.h5ad, PPI) · harder leakage (temporal, preprocessing) · a CI pre-flight gate.</text>
+</svg>

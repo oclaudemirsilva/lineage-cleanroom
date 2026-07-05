@@ -2,6 +2,9 @@
 
 **A provenance & contamination firewall for scientific ML.**
 
+<p align="center"><img src="assets/pipeline.svg" width="840"
+  alt="Pipeline: your dataset → leakage gate + provenance gate → Ed25519-signed manifest; roadmap toward more formats, harder leakage, and a CI gate"></p>
+
 It answers the question a reviewer, clinician, or regulator actually asks — *"can I trust this
 number?"* — by catching the two things that silently corrupt results, and then **signing** the verdict
 so it can't be quietly altered:
@@ -13,6 +16,11 @@ so it can't be quietly altered:
 
 Output: a tamper-evident, **Ed25519-signed manifest** of the dataset's lineage and integrity verdict —
 a reproducibility certificate you can attach to a paper, a submission, or a model card.
+
+**Proof at a glance** — runs in one command · **18 passing tests** · proven on **real public data**: on
+Pima Indians Diabetes a leaky split reports **AUC 0.99** while the honest AUC is **0.82** — CleanRoom
+catches the gap and **signs the verdict** (tamper the manifest and verification fails). Try it:
+`python -m lineage_cleanroom demo` · see [`demos/`](demos/).
 
 > Built for **Built with Claude: Life Sciences** (Anthropic + Gladstone Institutes). *Lineage* =
 > data lineage + cell lineage; *cleanroom* = the contamination-control environment of every lab.
@@ -96,6 +104,14 @@ Modular (SOLID), low-coupling, dependency-injected core, observability via an in
 See [`lineage_cleanroom/`](lineage_cleanroom/) — `ingest` · `leakage` · `provenance` · `manifest` ·
 `report` · `pipeline` · `cli` · `telemetry`. Deterministic and offline; the audit needs no model training.
 
+## Beyond life sciences
+
+The engine is **domain-agnostic** — it operates on any `(features, label, group, provenance)` table and
+knows nothing about biology. The same leakage plagues ~17 fields (Kapoor & Narayanan); only the *group*
+changes: patient / donor (medicine), subject (neuroimaging), site or sensor (remote sensing), molecular
+scaffold (cheminformatics), author (NLP), time window (finance). Each field also has its own *harder*
+leakage (temporal, spatial, scaffold) this tool does not yet claim to catch — see below.
+
 ## Known limitations & roadmap
 
 Honest about what it does *not* do (see [DECISIONS.md](DECISIONS.md) for the reasoning):
@@ -113,6 +129,8 @@ region) *when a group column is provided*; non-human-attested gold labels.
 
 **Roadmap:** format adapters (`.h5ad` single-cell, Parquet, FASTA, PPI edge-list); provenance-based
 augmentation lineage; a one-screen HTML report; and — the real test — running on live lab datasets.
+Longer term, *if adopted*, the natural shape is a **pre-flight gate in the pipeline / CI** plus closing the
+*harder* leakage types (temporal, preprocessing, target) catalogued as open research problems.
 
 ## Prior art & honest positioning
 

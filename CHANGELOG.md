@@ -2,6 +2,11 @@
 
 All notable changes to Lineage CleanRoom. Kept human-readable; the *why* lives in [DECISIONS.md](DECISIONS.md).
 
+## [0.1.3] — 2026-07-05
+### Added
+- README: a **pipeline diagram** (`assets/pipeline.svg`), a "Proof at a glance" line up top, and a
+  **Beyond life sciences** section (the engine is domain-agnostic across the ~17 fields where leakage occurs).
+
 ## [0.1.2] — 2026-07-05
 ### Added
 - Cited the evidence base (Kapoor & Narayanan 2023, *Patterns*) in the README, and an honest
