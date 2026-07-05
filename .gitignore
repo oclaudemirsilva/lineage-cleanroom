@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+audit/
+*.manifest.json
+*.report.md
+events.jsonl
+.DS_Store
