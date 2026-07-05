@@ -70,5 +70,26 @@ Modular (SOLID), low-coupling, dependency-injected core, observability via an in
 See [`lineage_cleanroom/`](lineage_cleanroom/) — `ingest` · `leakage` · `provenance` · `manifest` ·
 `report` · `pipeline` · `cli` · `telemetry`. Deterministic and offline; the audit needs no model training.
 
+## Known limitations & roadmap
+
+Honest about what it does *not* do (see [DECISIONS.md](DECISIONS.md) for the reasoning):
+
+**Detects:** exact feature-duplicate rows across the split; group-spanning leakage (donor / batch /
+region) *when a group column is provided*; non-human-attested gold labels.
+
+**Does not (yet) detect:**
+- **Near-duplicate / augmentation leakage** without a group column. We investigated distance-based
+  detection and found it cannot separate moderate augmentation from legitimately-similar samples without
+  false positives (DEC-5). Robust handling needs provenance tracking of the augmentation, not raw distance.
+- Temporal leakage, preprocessing-before-split leakage, and target leakage (a feature that encodes the label).
+- Anything you don't declare: group leakage needs a group column; provenance needs a provenance column.
+  Garbage in → not audited (the tool says so rather than pretending).
+
+**Roadmap:** format adapters (`.h5ad` single-cell, Parquet, FASTA, PPI edge-list); provenance-based
+augmentation lineage; a one-screen HTML report; and — the real test — running on live lab datasets.
+
+## Changelog & decisions
+[CHANGELOG.md](CHANGELOG.md) · [DECISIONS.md](DECISIONS.md) — a provenance tool keeps its own lineage of decisions.
+
 ## License
 MIT — see [LICENSE](LICENSE).
