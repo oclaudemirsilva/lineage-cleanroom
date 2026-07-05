@@ -2,6 +2,12 @@
 
 All notable changes to Lineage CleanRoom. Kept human-readable; the *why* lives in [DECISIONS.md](DECISIONS.md).
 
+## [0.1.2] — 2026-07-05
+### Added
+- Cited the evidence base (Kapoor & Narayanan 2023, *Patterns*) in the README, and an honest
+  **Prior art & positioning** section (Sigstore model-transparency, SLSA / in-toto, deepchecks, cleanlab).
+  The project makes **no novelty claim** — see [DECISIONS.md](DECISIONS.md) (DEC-6).
+
 ## [0.1.1] — 2026-07-05
 ### Added
 - **Demonstrations on real public data** ([`demos/`](demos/)), each with a committed signed manifest and CI-verified:

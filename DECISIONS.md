@@ -3,6 +3,16 @@
 Short records of the load-bearing decisions and *why* — including the ones we reversed. A provenance
 tool should keep its own lineage of decisions. Newest first.
 
+## DEC-6 — No novelty claim; prior art acknowledged
+**Context.** An early framing (in conversation) called the signed manifest "original." A prior-art check
+showed the parts are established: **Sigstore model-transparency** (Google/OpenSSF), **SLSA**, and
+**in-toto** for signed attestation of ML artifacts; **deepchecks**, **cleanlab**, and scikit-learn
+`GroupKFold` for leakage / data-integrity checks.
+**Decision.** Make **no novelty claim.** Document the prior art openly and position the contribution as
+*integration + convenience* for the scientific workflow (one command, both gates, a self-contained signed
+verdict). Acknowledging prior art raises credibility with technical reviewers; hiding it would contradict
+the tool's own thesis.
+
 ## DEC-5 — Near-duplicate detection: investigated, measured, not shipped
 **Context.** The exact-hash gate misses *near*-duplicates (data augmentation / jitter / noisy resampling
 across the split) — a real, common leakage source. We set out to close it.

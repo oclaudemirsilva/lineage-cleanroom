@@ -34,6 +34,17 @@ Science*, which records an artifact's history but does not prevent leakage or ce
 
 ---
 
+## Why this matters
+
+Data leakage is not a corner case. A 2023 survey found it affecting **294 papers across 17 scientific
+fields**, cataloguing eight leakage types from textbook errors to open research problems (Kapoor &
+Narayanan, *Leakage and the reproducibility crisis in ML-based science*, **Patterns** 2023 —
+[paper](https://www.cell.com/patterns/fulltext/S2666-3899(23)00159-9)). Lineage CleanRoom targets the
+tractable, detectable subset (exact-duplicate and group leakage); see *Known limitations* for the types
+it deliberately does not claim to catch.
+
+---
+
 ## Quickstart
 
 ```bash
@@ -102,6 +113,21 @@ region) *when a group column is provided*; non-human-attested gold labels.
 
 **Roadmap:** format adapters (`.h5ad` single-cell, Parquet, FASTA, PPI edge-list); provenance-based
 augmentation lineage; a one-screen HTML report; and — the real test — running on live lab datasets.
+
+## Prior art & honest positioning
+
+This project makes **no novel technical claim** — and says so on purpose.
+- **Signed provenance / attestation** of ML artifacts is mature: Sigstore
+  [model-transparency](https://github.com/sigstore/model-transparency) (Google / OpenSSF), **SLSA**, and
+  **in-toto** attestations do this rigorously, with transparency logs. Our Ed25519 manifest is a
+  *lightweight, dependency-light, self-contained* instance for a single audit — for production
+  supply-chain trust, use Sigstore.
+- **Leakage / data-integrity checks** exist in [deepchecks](https://github.com/deepchecks/deepchecks) and
+  [cleanlab](https://github.com/cleanlab/cleanlab); group-aware splitting ships in scikit-learn (`GroupKFold`).
+
+What Lineage CleanRoom contributes is **integration and convenience for the scientific workflow**: one
+command that runs a leakage gate *and* a human-attested-gold provenance gate and emits a self-contained
+signed verdict — not a new algorithm. Acknowledging the prior art openly is itself in the spirit of the tool.
 
 ## Changelog & decisions
 [CHANGELOG.md](CHANGELOG.md) · [DECISIONS.md](DECISIONS.md) — a provenance tool keeps its own lineage of decisions.
