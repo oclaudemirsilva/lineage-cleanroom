@@ -1,0 +1,4 @@
+# Optional extra: single-cell .h5ad (AnnData) format adapter.
+# The core (requirements.txt) does NOT need this — install only to audit .h5ad files.
+#   pip install -r requirements-h5ad.txt
+anndata>=0.10

@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import sys
 
+from .adapters import load_split_from_anndata
 from .ingest import load_split_from_pair, load_split_from_single
 from .pipeline import audit_split
 from .provenance import ProvenancePolicy
@@ -34,10 +35,18 @@ def cmd_scan(args: argparse.Namespace) -> int:
 
     features = _split_list(args.features)
     if args.data:
-        view = load_split_from_single(
-            args.data, label_col=args.label, split_col=args.split_col,
-            feature_cols=features, group_col=args.group, provenance_col=args.provenance,
-            train_value=args.train_value, test_value=args.test_value)
+        if args.data.lower().endswith((".h5ad", ".h5")):
+            # single-cell: mesmo contrato de papéis, container AnnData (dep opcional, import lazy).
+            view = load_split_from_anndata(
+                args.data, label_col=args.label, split_col=args.split_col,
+                feature_source=args.feature_source, obsm_key=args.obsm_key,
+                group_col=args.group, provenance_col=args.provenance,
+                train_value=args.train_value, test_value=args.test_value)
+        else:
+            view = load_split_from_single(
+                args.data, label_col=args.label, split_col=args.split_col,
+                feature_cols=features, group_col=args.group, provenance_col=args.provenance,
+                train_value=args.train_value, test_value=args.test_value)
     else:
         if not (args.train and args.test):
             print("erro: --train e --test são ambos obrigatórios nesse modo", file=sys.stderr)
@@ -83,7 +92,10 @@ def build_parser() -> argparse.ArgumentParser:
     sub = p.add_subparsers(dest="cmd", required=True)
 
     s = sub.add_parser("scan", help="audita um split treino/teste real")
-    s.add_argument("--data", help="CSV único (requer --split-col)")
+    s.add_argument("--data", help="CSV único, ou AnnData .h5ad (single-cell); requer --split-col")
+    s.add_argument("--feature-source", default="X",
+                   help="para .h5ad: 'X' (matriz células×genes) ou 'obsm' (incorporação nomeada)")
+    s.add_argument("--obsm-key", help="para .h5ad com --feature-source obsm: chave em .obsm (ex.: X_pca)")
     s.add_argument("--train", help="CSV de treino (modo par)")
     s.add_argument("--test", help="CSV de teste (modo par)")
     s.add_argument("--label", required=True, help="coluna do rótulo (y)")

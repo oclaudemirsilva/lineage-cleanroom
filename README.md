@@ -63,6 +63,12 @@ python -m lineage_cleanroom scan \
   --data dataset.csv --label activity --split-col split \
   --group donor --provenance label_source --out ./audit
 
+# audit a single-cell .h5ad (AnnData) split — column roles stay yours to name
+pip install -r requirements-h5ad.txt          # optional extra (anndata)
+python -m lineage_cleanroom scan \
+  --data screen.h5ad --label state --split-col split \
+  --group donor --provenance label_source --out ./audit
+
 # demonstration: catch-the-leak on synthetic data
 python -m lineage_cleanroom demo
 
@@ -103,6 +109,9 @@ recorded and cryptographically signed so it is tamper-evident and travels with t
 Modular (SOLID), low-coupling, dependency-injected core, observability via an injected telemetry sink.
 See [`lineage_cleanroom/`](lineage_cleanroom/) — `ingest` · `leakage` · `provenance` · `manifest` ·
 `report` · `pipeline` · `cli` · `telemetry`. Deterministic and offline; the audit needs no model training.
+Format **adapters** map any source to the same `SplitView` contract — CSV in the core, and single-cell
+`.h5ad` (AnnData) via [`lineage_cleanroom/adapters/`](lineage_cleanroom/adapters/) behind an optional,
+lazily-imported dependency, so the core stays dependency-light.
 
 ## Beyond life sciences
 
@@ -127,8 +136,10 @@ region) *when a group column is provided*; non-human-attested gold labels.
 - Anything you don't declare: group leakage needs a group column; provenance needs a provenance column.
   Garbage in → not audited (the tool says so rather than pretending).
 
-**Roadmap:** format adapters (`.h5ad` single-cell, Parquet, FASTA, PPI edge-list); provenance-based
-augmentation lineage; a one-screen HTML report; and — the real test — running on live lab datasets.
+**Roadmap:** the single-cell `.h5ad` (AnnData) adapter has **shipped** (optional dependency); next are
+more format adapters (Parquet, FASTA, PPI edge-list — PPI needs its own graph-leakage detector, not just a
+loader), provenance-based augmentation lineage, a one-screen HTML report, and — the real test — running on
+live lab datasets.
 Longer term, *if adopted*, the natural shape is a **pre-flight gate in the pipeline / CI** plus closing the
 *harder* leakage types (temporal, preprocessing, target) catalogued as open research problems.
 

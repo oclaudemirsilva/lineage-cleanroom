@@ -38,5 +38,5 @@
   <!-- roadmap band -->
   <line x1="32" y1="250" x2="868" y2="250" stroke="#21262d" stroke-width="1"/>
   <text x="32" y="276" fill="#8b949e" font-size="12"><tspan fill="#e6edf3" font-weight="600">Now:</tspan> exact-duplicate &amp; group leakage + label provenance, signed and CI-verified.</text>
-  <text x="32" y="298" fill="#6e7681" font-size="12"><tspan fill="#8b949e" font-weight="600">Where it's going:</tspan> more formats (.h5ad, PPI) · harder leakage (temporal, preprocessing) · a CI pre-flight gate.</text>
+  <text x="32" y="298" fill="#6e7681" font-size="12"><tspan fill="#8b949e" font-weight="600">Where it's going:</tspan> more formats (Parquet, PPI) · harder leakage (temporal, preprocessing) · a CI pre-flight gate.</text>
 </svg>

@@ -2,6 +2,18 @@
 
 All notable changes to Lineage CleanRoom. Kept human-readable; the *why* lives in [DECISIONS.md](DECISIONS.md).
 
+## [0.1.4] — 2026-07-05
+### Added
+- **Single-cell `.h5ad` (AnnData) format adapter** (`lineage_cleanroom/adapters/`) mapping AnnData →
+  the same domain-agnostic `SplitView` contract: `.X` (or a named `.obsm` embedding) → features,
+  `.obs` columns → label / group / provenance / split (the column *roles* stay caller-supplied — no
+  biology is hard-coded). `anndata` is an **optional, lazily-imported** dependency
+  ([requirements-h5ad.txt](requirements-h5ad.txt)); the core stays numpy/sklearn/cryptography-only.
+- `scan` **auto-detects `.h5ad`** by extension (`--feature-source X|obsm`, `--obsm-key`).
+- Tests with a **positive control** (a donor spanning train/test is caught) *and* a **negative
+  control** (a group-aware split is *not* flagged); skipped cleanly when `anndata` is absent.
+  Validated end-to-end through the CLI on real `.h5ad` files (leaky → FAIL/exit 1; clean → PASS/exit 0).
+
 ## [0.1.3] — 2026-07-05
 ### Added
 - README: a **pipeline diagram** (`assets/pipeline.svg`), a "Proof at a glance" line up top, and a
