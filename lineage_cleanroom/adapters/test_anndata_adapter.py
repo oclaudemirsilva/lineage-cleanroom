@@ -134,3 +134,27 @@ def test_missing_column_raises(tmp_path):
     _make_adata().write_h5ad(p)
     with pytest.raises(ValueError, match="não encontradas"):
         load_split_from_anndata(str(p), label_col="nope", split_col="split_leak")
+
+
+def test_obsm_source_without_key_raises(tmp_path):
+    p = tmp_path / "ok.h5ad"
+    _make_adata().write_h5ad(p)
+    with pytest.raises(ValueError, match="obsm_key"):
+        load_split_from_anndata(
+            str(p), label_col="label", split_col="split_clean", feature_source="obsm")
+
+
+def test_invalid_feature_source_raises(tmp_path):
+    p = tmp_path / "ok.h5ad"
+    _make_adata().write_h5ad(p)
+    with pytest.raises(ValueError, match="feature_source"):
+        load_split_from_anndata(
+            str(p), label_col="label", split_col="split_clean", feature_source="bogus")
+
+
+def test_split_value_absent_raises(tmp_path):
+    p = tmp_path / "ok.h5ad"
+    _make_adata().write_h5ad(p)
+    with pytest.raises(ValueError, match="Nenhum exemplo"):
+        load_split_from_anndata(
+            str(p), label_col="label", split_col="split_clean", test_value="holdout")
